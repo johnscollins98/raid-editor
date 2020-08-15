@@ -23,6 +23,6 @@ connection.once("open", () => {
 });
 
 const wingRoute = require("./routes/wings");
-app.use("/wings", wingRoute);
+app.use("/api/wings", wingRoute);
 
 app.listen(port, () => console.log(`Server is listening on port ${port}`));
