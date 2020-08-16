@@ -53,7 +53,7 @@ const Member = ({ member, params, setEncounter }) => {
     }
 
     const postedEncounter = res.data.encounters.find(
-      (e) => e._id == params.encounter_id
+      (e) => e._id === params.encounter_id
     );
     setEncounter(postedEncounter);
   };
@@ -64,7 +64,7 @@ const Member = ({ member, params, setEncounter }) => {
       const res = await axios.delete(url);
 
       const postedEncounter = res.data.encounters.find(
-        (e) => e._id == params.encounter_id
+        (e) => e._id === params.encounter_id
       );
       setEncounter(postedEncounter);
     }
@@ -100,10 +100,13 @@ const Member = ({ member, params, setEncounter }) => {
       </td>
       <td>
         <Row>
-          <Button className="btn btn-primary mr-1" onClick={updateMember}>
+          <Button
+            className="btn btn-primary btn-sm mr-1"
+            onClick={updateMember}
+          >
             Update
           </Button>
-          <Button className="btn btn-danger" onClick={deleteMember}>
+          <Button className="btn btn-danger btn-sm" onClick={deleteMember}>
             Delete
           </Button>
         </Row>

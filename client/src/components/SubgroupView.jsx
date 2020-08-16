@@ -21,7 +21,7 @@ const SubgroupView = ({ setEncounter, subgroup, totalMembers, params }) => {
     const res = await axios.post(url, newMember);
 
     const postedEncounter = res.data.encounters.find(
-      (e) => e._id == params.encounter_id
+      (e) => e._id === params.encounter_id
     );
     setEncounter(postedEncounter);
   };
@@ -46,7 +46,7 @@ const SubgroupView = ({ setEncounter, subgroup, totalMembers, params }) => {
     }
 
     const postedEncounter = res.data.encounters.find(
-      (e) => e._id == params.encounter_id
+      (e) => e._id === params.encounter_id
     );
     setEncounter(postedEncounter);
   };
@@ -57,7 +57,7 @@ const SubgroupView = ({ setEncounter, subgroup, totalMembers, params }) => {
       const res = await axios.delete(url);
 
       const postedEncounter = res.data.encounters.find(
-        (e) => e._id == params.encounter_id
+        (e) => e._id === params.encounter_id
       );
       setEncounter(postedEncounter);
     }
@@ -72,13 +72,13 @@ const SubgroupView = ({ setEncounter, subgroup, totalMembers, params }) => {
         onChange={(e) => setLabel(e.target.value)}
       />
       <Button
-        className="btn btn-primary btn-sm ml-2 mb-2"
+        className="btn btn-primary btn-sm ml-1 mb-2"
         onClick={updateSubgroup}
       >
         Rename
       </Button>
       <Button
-        className="btn btn-danger btn-sm ml-2 mb-2"
+        className="btn btn-danger btn-sm ml-1 mb-2"
         onClick={deleteSubgroup}
       >
         Delete
@@ -125,7 +125,7 @@ const SubgroupView = ({ setEncounter, subgroup, totalMembers, params }) => {
               <td>
                 <Row>
                   <Button
-                    className="btn btn-success mr-1"
+                    className="btn btn-success btn-sm mr-1"
                     onClick={createMember}
                   >
                     Create

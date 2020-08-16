@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import Form from "react-bootstrap/Form";
 import axios from "axios";
 
@@ -14,7 +14,7 @@ const NewSubgroup = ({ params, encounter, setEncounter }) => {
     const res = await axios.post(url, newEncounter);
 
     const postedEncounter = res.data.encounters.find(
-      (e) => e._id == params.encounter_id
+      (e) => e._id === params.encounter_id
     );
 
     setEncounter(postedEncounter);

@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import Button from "react-bootstrap/Button";
+import Row from "react-bootstrap/Row";
 
 const WingLink = ({ wing, deleteWing }) => (
   <tr>
@@ -10,21 +11,21 @@ const WingLink = ({ wing, deleteWing }) => (
       </h5>
     </td>
     <td>
-      <Link
-        to={`/wings/${wing._id}`}
-        key={wing._id}
-        className="btn btn-primary btn-sm"
-      >
-        Edit
-      </Link>
-    </td>
-    <td>
-      <Button
-        className="btn btn-danger btn-sm"
-        onClick={() => deleteWing(wing._id)}
-      >
-        Delete
-      </Button>
+      <Row>
+        <Link
+          to={`/wings/${wing._id}`}
+          key={wing._id}
+          className="btn btn-primary btn-sm mr-1"
+        >
+          Edit
+        </Link>
+        <Button
+          className="btn btn-danger btn-sm"
+          onClick={() => deleteWing(wing._id)}
+        >
+          Delete
+        </Button>
+      </Row>
     </td>
   </tr>
 );

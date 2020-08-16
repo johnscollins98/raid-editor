@@ -63,7 +63,7 @@ function App() {
           <Col sm={4}>
             <Row>
               <h5 className="ml-2">Logged in: {user}</h5>
-              <a href="/auth/logout" className="btn btn-danger ml-2">
+              <a href="/auth/logout" className="btn btn-danger btn-sm ml-2">
                 Log Out
               </a>
             </Row>
