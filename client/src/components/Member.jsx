@@ -45,7 +45,7 @@ const Member = ({ member, params, setEncounter }) => {
         role !== member.role ||
         profession !== member.profession
     );
-  });
+  }, [name, member.name, member.role, member.profession, role, profession]);
 
   const updateMember = async () => {
     const newMember = {
