@@ -17,8 +17,6 @@ const NewWing = ({ wings, setWings }) => {
 
     try {
       const res = await axios.post("http://localhost:5000/api/wings", wing);
-      console.log(res.data);
-      console.log(wings);
       setWings(wings.concat(res.data));
     } catch (err) {
       console.log(err);
@@ -27,6 +25,7 @@ const NewWing = ({ wings, setWings }) => {
 
   return (
     <Form>
+      <h3>Add New Wing</h3>
       <Form.Group>
         <Form.Label>Wing Number: </Form.Label>
         <Form.Control type="number" value={wings.length + 1} disabled />
@@ -37,8 +36,8 @@ const NewWing = ({ wings, setWings }) => {
           type="text"
           value={wingName}
           placeholder="Wing Name..."
-          required
           onChange={(e) => setWingName(e.target.value)}
+          required
         />
       </Form.Group>
       <Form.Group>

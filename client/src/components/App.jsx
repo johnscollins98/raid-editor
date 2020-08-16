@@ -3,6 +3,7 @@ import Container from "react-bootstrap/Container";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import WingList from "./WingList";
 import "bootstrap/dist/css/bootstrap.min.css";
+import "./App.css";
 import axios from "axios";
 
 function App() {

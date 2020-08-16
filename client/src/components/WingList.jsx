@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { Link } from "react-router-dom";
 import NewWing from "./NewWing";
+import WingLink from "./WingLink";
+import Table from "react-bootstrap/Table";
 
 const WingList = (props) => {
   const [wings, setWings] = useState([]);
@@ -19,28 +20,25 @@ const WingList = (props) => {
   }, []);
 
   const deleteWing = async (id) => {
-    const url = `http://localhost:5000/api/wings/${id}`;
-    const res = await axios.delete(url);
+    if (window.confirm("Are you sure you want to delete this Wing?")) {
+      const url = `http://localhost:5000/api/wings/${id}`;
+      await axios.delete(url);
+      setWings(wings.filter((wing) => wing._id != id));
+    }
   };
 
   const getWingLinks = () => {
-    console.log(wings);
     return wings.map((wing) => (
-      <li key={wing._id}>
-        <Link to={`/wings/${wing._id}`} key={wing._id}>
-          {wing.wingLabel}
-        </Link>
-        -
-        <a href="#" onClick={() => deleteWing(wing._id)}>
-          Delete
-        </a>
-      </li>
+      <WingLink wing={wing} deleteWing={deleteWing} key={wing._id} />
     ));
   };
 
   return (
     <div>
-      <ul>{getWingLinks()}</ul>
+      <h3>Existing Wings</h3>
+      <Table>
+        <tbody>{getWingLinks()}</tbody>
+      </Table>
       <NewWing wings={wings} setWings={setWings} />
     </div>
   );
