@@ -20,7 +20,6 @@ router.get("/authorization", async (req, res) => {
     let authorized = false;
     if (inSO) {
       const roles = await getRoles(req.user.id);
-      console.log(roles);
       authorized = roles.includes(process.env.VALID_ROLE);
     }
     res.json({ loggedIn, authorized });

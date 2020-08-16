@@ -23,7 +23,7 @@ const WingList = (props) => {
     if (window.confirm("Are you sure you want to delete this Wing?")) {
       const url = `http://localhost:5000/api/wings/${id}`;
       await axios.delete(url);
-      setWings(wings.filter((wing) => wing._id != id));
+      setWings(wings.filter((wing) => wing._id !== id));
     }
   };
 
