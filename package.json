@@ -1,0 +1,21 @@
+{
+  "name": "guild-comp-editor",
+  "version": "1.0.0",
+  "description": "Application to edit raid compositions.",
+  "main": "index.js",
+  "scripts": {
+    "start": "cd server && npm install && node server.js",
+    "heroku-postbuild": "cd client && npm install && npm run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/johnscollins98/raid-editor.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/johnscollins98/raid-editor/issues"
+  },
+  "homepage": "https://github.com/johnscollins98/raid-editor#readme"
+}
