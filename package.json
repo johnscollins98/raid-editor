@@ -4,9 +4,9 @@
   "description": "Application to edit raid compositions.",
   "main": "index.js",
   "scripts": {
-    "start": "cd server && npm install && node server.js",
-    "heroku-postbuild": "cd client && npm install && npm run build"
-  },
+    "heroku-prebuild": "cd client && npm install && npm run build && cd .. && cd server && npm install",
+    "start": "cd server && npm start"
+  }
   "repository": {
     "type": "git",
     "url": "git+https://github.com/johnscollins98/raid-editor.git"
