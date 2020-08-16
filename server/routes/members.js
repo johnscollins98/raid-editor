@@ -88,6 +88,9 @@ router.put("/:member_id", async (req, res) => {
     );
     const member = subgroup.members.find((m) => m._id == req.params.member_id);
 
+    console.log(member);
+    console.log(req.body);
+
     member.name = req.body.name;
     member.role = req.body.role;
     member.profession = req.body.profession;
@@ -119,7 +122,7 @@ router.delete("/:member_id", async (req, res) => {
     const newWing = await wing.save();
     res.json(newWing);
   } catch (err) {
-    res.status(400).json(`Error: ${json}`);
+    res.status(400).json(`Error: ${err}`);
   }
 });
 

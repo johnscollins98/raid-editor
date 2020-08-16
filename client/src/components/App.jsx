@@ -10,6 +10,7 @@ import "./App.css";
 import axios from "axios";
 import WingView from "./WingView";
 import Loading from "./Loading";
+import EncounterView from "./EncounterView";
 
 function App() {
   const [loggedIn, setLoggedIn] = useState(false);
@@ -69,12 +70,15 @@ function App() {
           </Col>
         </Row>
         <Row>
-          <Route path="/" exact component={WingList} />
-          <Route path="/wings/:wing_id" component={WingView} />
-          {/* <Route
-          path="/wings/:wing_id/encounters/:encounter_id"
-          component={EncounterView}
-        /> */}
+          <Col>
+            <Route path="/" exact component={WingList} />
+            <Route path="/wings/:wing_id" exact component={WingView} />
+            <Route
+              path="/wings/:wing_id/encounters/:encounter_id"
+              exact
+              component={EncounterView}
+            />
+          </Col>
         </Row>
       </Container>
     </Router>

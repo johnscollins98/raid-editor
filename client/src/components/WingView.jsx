@@ -45,6 +45,7 @@ const WingView = (props) => {
   return (
     <div>
       <EditWing wing={wing} setWing={setWing} />
+      <h3>Existing Encounters</h3>
       <Table>
         <tbody>{getEncounterLinks()}</tbody>
       </Table>
