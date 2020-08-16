@@ -6,7 +6,7 @@
   "scripts": {
     "heroku-prebuild": "cd client && npm install && npm run build && cd .. && cd server && npm install",
     "start": "cd server && npm start"
-  }
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/johnscollins98/raid-editor.git"
