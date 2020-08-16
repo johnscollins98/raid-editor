@@ -2,17 +2,15 @@ import React from "react";
 import { Link } from "react-router-dom";
 import Button from "react-bootstrap/Button";
 
-const WingLink = ({ wing, deleteWing }) => (
+const EncounterLink = ({ wing, encounter, deleteEncounter }) => (
   <tr>
     <td>
-      <h5>
-        {wing.wingLabel} - {wing.wingName}
-      </h5>
+      <h5>{encounter.label}</h5>
     </td>
     <td>
       <Link
-        to={`/wings/${wing._id}`}
-        key={wing._id}
+        to={`/wings/${wing._id}/encounters/${encounter._id}`}
+        key={encounter._id}
         className="btn btn-primary btn-sm"
       >
         Edit
@@ -21,7 +19,7 @@ const WingLink = ({ wing, deleteWing }) => (
     <td>
       <Button
         className="btn btn-danger btn-sm"
-        onClick={() => deleteWing(wing._id)}
+        onClick={() => deleteEncounter(encounter._id)}
       >
         Delete
       </Button>
@@ -29,4 +27,4 @@ const WingLink = ({ wing, deleteWing }) => (
   </tr>
 );
 
-export default WingLink;
+export default EncounterLink;

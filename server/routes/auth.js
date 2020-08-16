@@ -32,7 +32,6 @@ const getRoles = async (userId) => {
   const url = `http://discord.com/api/guilds/${process.env.SO_ID}/members/${userId}`;
   const params = { headers: { Authorization: `Bot ${process.env.BOT_TOKEN}` } };
   const user = await axios.get(url, params);
-  console.log(user);
   return user.data.roles;
 };
 
