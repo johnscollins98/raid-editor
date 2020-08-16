@@ -22,7 +22,7 @@ router.get("/authorization", async (req, res) => {
       const roles = await getRoles(req.user.id);
       authorized = roles.includes(process.env.VALID_ROLE);
     }
-    res.json({ loggedIn, authorized });
+    res.json({ loggedIn, authorized, username: req.user.username });
   } else {
     res.status(403).json("Forbidden");
   }
