@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Row from "react-bootstrap/Row";
 import Button from "react-bootstrap/Button";
+import Form from "react-bootstrap/Form";
 import axios from "axios";
 
 export const availableProfessions = [
@@ -88,21 +89,25 @@ const Member = ({ member, params, setEncounter }) => {
   return (
     <tr>
       <td>
-        <input
+        <Form.Control
+          size="sm"
           type="text"
           value={name}
           onChange={(e) => setName(e.target.value)}
         />
       </td>
       <td>
-        <input
+        <Form.Control
+          size="sm"
           type="text"
           value={role}
           onChange={(e) => setRole(e.target.value)}
         />
       </td>
       <td>
-        <select
+        <Form.Control
+          size="sm"
+          as="select"
           value={profession}
           onChange={(e) => setProfession(e.target.value)}
         >
@@ -111,7 +116,7 @@ const Member = ({ member, params, setEncounter }) => {
               {p}
             </option>
           ))}
-        </select>
+        </Form.Control>
       </td>
       <td>
         {modified ? (

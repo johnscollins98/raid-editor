@@ -24,6 +24,7 @@ const EditWing = ({ wing, setWing }) => {
       <Form.Group>
         <Form.Label>Wing Name:</Form.Label>
         <Form.Control
+          size="sm"
           type="text"
           value={wingName}
           placeholder="Wing Name..."
@@ -32,7 +33,12 @@ const EditWing = ({ wing, setWing }) => {
         />
       </Form.Group>
       <Form.Group>
-        <Form.Control type="submit" onClick={onSubmit} value="Edit Wing" />
+        <Form.Control
+          type="submit"
+          size="sm"
+          onClick={onSubmit}
+          value="Edit Wing"
+        />
       </Form.Group>
     </Form>
   );

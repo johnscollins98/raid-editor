@@ -24,7 +24,12 @@ const NewSubgroup = ({ params, encounter, setEncounter }) => {
     <Form>
       <h3>New Subgroup</h3>
       <Form.Group>
-        <Form.Control type="submit" onClick={onSubmit} value="Add Subgroup" />
+        <Form.Control
+          type="submit"
+          size="sm"
+          onClick={onSubmit}
+          value="Add Subgroup"
+        />
       </Form.Group>
     </Form>
   );

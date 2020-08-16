@@ -11,6 +11,7 @@ import axios from "axios";
 import WingView from "./WingView";
 import Loading from "./Loading";
 import EncounterView from "./EncounterView";
+import LoginForm from "./LoginForm";
 
 function App() {
   const [loggedIn, setLoggedIn] = useState(false);
@@ -39,9 +40,7 @@ function App() {
   if (!loggedIn)
     return (
       <Container>
-        <a href="/auth" className="btn btn-primary">
-          Log In
-        </a>
+        <LoginForm />
       </Container>
     );
   if (!authorized)

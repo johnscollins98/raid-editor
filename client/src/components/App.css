@@ -2,3 +2,13 @@
   padding-top: 15px;
   padding-bottom: 15px;
 }
+
+.discord-btn {
+  background-color: #7289da;
+  color: white;
+}
+
+.discord-btn:hover {
+  background-color: #8ea1e1;
+  color: white;
+}

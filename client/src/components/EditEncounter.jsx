@@ -28,6 +28,7 @@ const EditEncounter = ({ encounter, params }) => {
         <Form.Group>
           <Form.Label>Encounter Name:</Form.Label>
           <Form.Control
+            size="sm"
             type="text"
             value={label}
             placeholder="Encounter name..."
@@ -36,6 +37,7 @@ const EditEncounter = ({ encounter, params }) => {
         </Form.Group>
         <Form.Group>
           <Form.Control
+            size="sm"
             type="submit"
             onClick={onSubmit}
             value="Edit Encounter"
