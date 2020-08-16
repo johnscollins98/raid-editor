@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Row from "react-bootstrap/Row";
 import Button from "react-bootstrap/Button";
 import axios from "axios";
@@ -37,6 +37,15 @@ const Member = ({ member, params, setEncounter }) => {
   const [name, setName] = useState(member.name);
   const [role, setRole] = useState(member.role);
   const [profession, setProfession] = useState(member.profession);
+  const [modified, setModified] = useState(false);
+
+  useEffect(() => {
+    setModified(
+      name !== member.name ||
+        role !== member.role ||
+        profession !== member.profession
+    );
+  });
 
   const updateMember = async () => {
     const newMember = {
@@ -44,7 +53,7 @@ const Member = ({ member, params, setEncounter }) => {
       role,
       profession,
     };
-    console.log(params.subgroup_id);
+
     const url = `/api/wings/${params.wing_id}/encounters/${params.encounter_id}/subgroups/${params.subgroup_id}/members/${member._id}`;
     const res = await axios.put(url, newMember);
 
@@ -68,6 +77,12 @@ const Member = ({ member, params, setEncounter }) => {
       );
       setEncounter(postedEncounter);
     }
+  };
+
+  const reset = async () => {
+    setName(member.name);
+    setRole(member.role);
+    setProfession(member.profession);
   };
 
   return (
@@ -97,6 +112,15 @@ const Member = ({ member, params, setEncounter }) => {
             </option>
           ))}
         </select>
+      </td>
+      <td>
+        {modified ? (
+          <Button className="btn btn-sm btn-warning" onClick={reset}>
+            Reset
+          </Button>
+        ) : (
+          ""
+        )}
       </td>
       <td>
         <Row>

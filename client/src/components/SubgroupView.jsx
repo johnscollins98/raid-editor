@@ -89,6 +89,7 @@ const SubgroupView = ({ setEncounter, subgroup, totalMembers, params }) => {
             <th>Name</th>
             <th>Role</th>
             <th>Profession</th>
+            <th>Unsaved</th>
             <th>Actions</th>
           </tr>
         </thead>
