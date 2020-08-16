@@ -16,7 +16,7 @@ const NewWing = ({ wings, setWings }) => {
     };
 
     try {
-      const res = await axios.post("http://localhost:5000/api/wings", wing);
+      const res = await axios.post("/api/wings", wing);
       setWings(wings.concat(res.data));
     } catch (err) {
       console.log(err);

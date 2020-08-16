@@ -12,7 +12,7 @@ const WingView = (props) => {
     const fetchWing = async () => {
       try {
         const fetchedWing = await axios.get(
-          `http://localhost:5000/api/wings/${props.match.params.wing_id}`
+          `/api/wings/${props.match.params.wing_id}`
         );
         setWing(fetchedWing.data);
       } catch (err) {
@@ -24,7 +24,7 @@ const WingView = (props) => {
 
   const deleteEncounter = async (id) => {
     if (window.confirm("Are you sure you want to delete this Wing?")) {
-      const url = `http://localhost:5000/api/wings/${props.match.params.wing_id}/encounters/${id}`;
+      const url = `/api/wings/${props.match.params.wing_id}/encounters/${id}`;
       const res = await axios.delete(url);
       setWing(res.data);
     }

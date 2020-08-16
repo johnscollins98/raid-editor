@@ -12,10 +12,7 @@ const EditWing = ({ wing, setWing }) => {
       ...wing,
       wingName,
     };
-    const res = await axios.put(
-      `http://localhost:5000/api/wings/${wing._id}`,
-      newWing
-    );
+    const res = await axios.put(`/api/wings/${wing._id}`, newWing);
     setWing(res.data);
   };
 

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import WingList from "./WingList";
 import Alert from "react-bootstrap/Alert";
@@ -19,9 +20,7 @@ function App() {
   useEffect(() => {
     const checkLoggedIn = async () => {
       try {
-        const user = await axios.get(
-          "http://localhost:5000/auth/authorization"
-        );
+        const user = await axios.get("/auth/authorization");
         setLoaded(true);
         setLoggedIn(user.data.loggedIn);
         setAuthorized(user.data.authorized);
@@ -39,7 +38,7 @@ function App() {
   if (!loggedIn)
     return (
       <Container>
-        <a href="http://localhost:5000/auth" className="btn btn-primary">
+        <a href="/auth" className="btn btn-primary">
           Log In
         </a>
       </Container>
@@ -55,10 +54,19 @@ function App() {
     <Router>
       <Container>
         <Row className="mb-2">
-          <Link to="/" className="btn btn-primary btn-sm">
-            Home
-          </Link>
-          <h5 className="ml-2">Logged in: {user}</h5>
+          <Col sm={8}>
+            <Link to="/" className="btn btn-primary btn-sm">
+              Home
+            </Link>
+          </Col>
+          <Col sm={4}>
+            <Row>
+              <h5 className="ml-2">Logged in: {user}</h5>
+              <a href="/auth/logout" className="btn btn-danger ml-2">
+                Log Out
+              </a>
+            </Row>
+          </Col>
         </Row>
         <Row>
           <Route path="/" exact component={WingList} />

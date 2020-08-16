@@ -10,7 +10,7 @@ const WingList = (props) => {
   useEffect(() => {
     const fetchWings = async () => {
       try {
-        const response = await axios.get("http://localhost:5000/api/wings/");
+        const response = await axios.get("/api/wings/");
         setWings(response.data);
       } catch (err) {
         console.log(err);
@@ -21,7 +21,7 @@ const WingList = (props) => {
 
   const deleteWing = async (id) => {
     if (window.confirm("Are you sure you want to delete this Wing?")) {
-      const url = `http://localhost:5000/api/wings/${id}`;
+      const url = `/api/wings/${id}`;
       await axios.delete(url);
       setWings(wings.filter((wing) => wing._id !== id));
     }

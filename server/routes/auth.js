@@ -12,6 +12,11 @@ router.get(
   })
 );
 
+router.get("/logout", (req, res) => {
+  req.logout();
+  res.redirect("/");
+});
+
 router.get("/authorization", async (req, res) => {
   if (req.user) {
     const loggedIn = true;

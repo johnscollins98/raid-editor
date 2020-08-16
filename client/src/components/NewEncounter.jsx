@@ -13,7 +13,7 @@ const EditWing = ({ wing, setWing }) => {
       label: encounterName,
     };
     const res = await axios.post(
-      `http://localhost:5000/api/wings/${wing._id}/encounters`,
+      `/api/wings/${wing._id}/encounters`,
       newEncounter
     );
     setWing(res.data);
