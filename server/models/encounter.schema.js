@@ -21,6 +21,12 @@ const encounterSchema = new Schema(
         sparse: true,
       },
     },
+    imageLink: {
+      type: String,
+    },
+    notes: {
+      type: String,
+    },
     subgroups: {
       type: [Subgroup],
       required: true,

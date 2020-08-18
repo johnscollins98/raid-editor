@@ -4,12 +4,16 @@ import axios from "axios";
 
 const EditEncounter = ({ encounter, params }) => {
   const [label, setLabel] = useState(encounter.label);
+  const [imageLink, setImageLink] = useState(encounter.imageLink);
+  const [notes, setNotes] = useState(encounter.notes);
 
   const onSubmit = async (e) => {
     e.preventDefault();
 
     const newEncounter = {
       label,
+      imageLink,
+      notes,
       id: label.toLowerCase().split(" ").join("-"),
     };
 
@@ -33,6 +37,28 @@ const EditEncounter = ({ encounter, params }) => {
             value={label}
             placeholder="Encounter name..."
             onChange={(e) => setLabel(e.target.value)}
+          />
+        </Form.Group>
+        <Form.Group>
+          <Form.Label>Image Link:</Form.Label>
+          <Form.Control
+            size="sm"
+            type="text"
+            value={imageLink}
+            placeholder="Image Link..."
+            onChange={(e) => setImageLink(e.target.value)}
+          />
+        </Form.Group>
+        <Form.Group>
+          <Form.Label>Notes:</Form.Label>
+          <Form.Control
+            size="sm"
+            as="textarea"
+            rows="5"
+            value={notes}
+            placeholder="Notes..."
+            style={{ fontFamily: "consolas, Courier New, Courier, monospace" }}
+            onChange={(e) => setNotes(e.target.value)}
           />
         </Form.Group>
         <Form.Group>

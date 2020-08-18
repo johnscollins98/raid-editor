@@ -36,8 +36,12 @@ router.put("/:encounter_id", async (req, res) => {
     const encounter = wing.encounters.find(
       (e) => e._id == req.params.encounter_id
     );
+    
     encounter.id = req.body.id;
     encounter.label = req.body.label;
+    encounter.imageLink = req.body.imageLink;
+    encounter.notes = req.body.notes;
+
     const newWing = await wing.save();
     res.json(newWing);
   } catch (err) {
@@ -70,6 +74,8 @@ router.post("/", async (req, res) => {
     const newEncounter = {
       id: req.body.id,
       label: req.body.label,
+      imageLink: req.body.imageLink,
+      notes: req.body.notes,
       subgroups: [],
     };
 
