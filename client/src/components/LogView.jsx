@@ -23,10 +23,10 @@ const LogView = () => {
   const getLogEntries = () => {
     return log.map((entry) => (
       <tr key={entry._id}>
+        <td>{new Date(entry.createdAt).toLocaleString()}</td>
         <td>{entry.user}</td>
         <td>{entry.action}</td>
         <td>{entry.dataType}</td>
-        <td>{entry.changedId}</td>
       </tr>
     ));
   };
@@ -34,6 +34,14 @@ const LogView = () => {
   if (!log) return <Loading />;
   return (
     <Table>
+      <thead>
+        <tr>
+          <th>Date</th>
+          <th>Name</th>
+          <th>Action</th>
+          <th>Type</th>
+        </tr>
+      </thead>
       <tbody>{getLogEntries()}</tbody>
     </Table>
   );
