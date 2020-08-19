@@ -12,6 +12,7 @@ import WingView from "./WingView";
 import Loading from "./Loading";
 import EncounterView from "./EncounterView";
 import LoginForm from "./LoginForm";
+import LogView from "./LogView";
 
 function App() {
   const [loggedIn, setLoggedIn] = useState(false);
@@ -55,9 +56,14 @@ function App() {
       <Container>
         <Row className="mb-2">
           <Col sm={8}>
-            <Link to="/" className="btn btn-primary btn-sm">
-              Home
-            </Link>
+            <Row>
+              <Link to="/" className="btn btn-primary btn-sm">
+                Home
+              </Link>
+              <Link to="/log" className="btn btn-secondary btn-sm ml-2">
+                Log
+              </Link>
+            </Row>
           </Col>
           <Col sm={4}>
             <Row>
@@ -71,6 +77,7 @@ function App() {
         <Row>
           <Col>
             <Route path="/" exact component={WingList} />
+            <Route path="/log" exact component={LogView} />
             <Route path="/wings/:wing_id" exact component={WingView} />
             <Route
               path="/wings/:wing_id/encounters/:encounter_id"
