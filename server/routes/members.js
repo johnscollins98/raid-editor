@@ -1,6 +1,7 @@
 const router = require("express").Router({ mergeParams: true });
 
 let Wing = require("../models/wing.model");
+const logger = require("../utils/logging");
 const memberSchema = require("../models/member.schema");
 
 router.get("/", async (req, res) => {
@@ -42,6 +43,8 @@ router.get("/:member_id", async (req, res) => {
 
 router.post("/", async (req, res) => {
   try {
+    if (!req.user) return res.status("403").json("Unauthenticated");
+
     const wing = await Wing.findOne({
       "encounters.subgroups._id": req.params.subgroup_id,
     });
@@ -68,6 +71,12 @@ router.post("/", async (req, res) => {
 
     subgroup.members.push(member);
     const newWing = await wing.save();
+    logger.createLog(
+      req.user.username,
+      "added",
+      "member",
+      req.params.subgroup_id
+    );
     res.json(newWing);
   } catch (err) {
     res.status(400).json(`Error: ${err}`);
@@ -76,6 +85,8 @@ router.post("/", async (req, res) => {
 
 router.put("/:member_id", async (req, res) => {
   try {
+    if (!req.user) return res.status("403").json("Unauthenticated");
+
     const wing = await Wing.findOne({
       "encounters.subgroups.members._id": req.params.member_id,
     });
@@ -88,14 +99,18 @@ router.put("/:member_id", async (req, res) => {
     );
     const member = subgroup.members.find((m) => m._id == req.params.member_id);
 
-    console.log(member);
-    console.log(req.body);
-
     member.name = req.body.name;
     member.role = req.body.role;
     member.profession = req.body.profession;
 
     const newWing = await wing.save();
+    logger.createLog(
+      req.user.username,
+      "updated",
+      "member",
+      req.params.member_id
+    );
+
     res.json(newWing);
   } catch (err) {
     res.status(400).json(`Error: ${err}`);
@@ -104,6 +119,8 @@ router.put("/:member_id", async (req, res) => {
 
 router.delete("/:member_id", async (req, res) => {
   try {
+    if (!req.user) return res.status("403").json("Unauthenticated");
+
     const wing = await Wing.findOne({
       "encounters.subgroups.members._id": req.params.member_id,
     });
@@ -120,6 +137,12 @@ router.delete("/:member_id", async (req, res) => {
     );
     subgroup.members.splice(memberIndex, 1);
     const newWing = await wing.save();
+    logger.createLog(
+      req.user.username,
+      "deleted",
+      "member",
+      req.params.subgroup_id
+    );
     res.json(newWing);
   } catch (err) {
     res.status(400).json(`Error: ${err}`);

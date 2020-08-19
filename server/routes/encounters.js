@@ -1,4 +1,5 @@
 const router = require("express").Router({ mergeParams: true });
+const logger = require("../utils/logging");
 
 let Wing = require("../models/wing.model");
 
@@ -29,6 +30,8 @@ router.get("/:encounter_id", async (req, res) => {
 
 router.put("/:encounter_id", async (req, res) => {
   try {
+    if (!req.user) return res.status("403").json("Unauthenticated");
+
     const wing = await Wing.findOne({
       "encounters._id": req.params.encounter_id,
     });
@@ -36,13 +39,19 @@ router.put("/:encounter_id", async (req, res) => {
     const encounter = wing.encounters.find(
       (e) => e._id == req.params.encounter_id
     );
-    
+
     encounter.id = req.body.id;
     encounter.label = req.body.label;
     encounter.imageLink = req.body.imageLink;
     encounter.notes = req.body.notes;
 
     const newWing = await wing.save();
+    logger.createLog(
+      req.user.username,
+      "updated",
+      "encounter",
+      req.params.encounter_id
+    );
     res.json(newWing);
   } catch (err) {
     res.status(400).json(`Error: ${err}`);
@@ -51,6 +60,8 @@ router.put("/:encounter_id", async (req, res) => {
 
 router.delete("/:encounter_id", async (req, res) => {
   try {
+    if (!req.user) return res.status("403").json("Unauthenticated");
+
     const wing = await Wing.findOne({
       "encounters._id": req.params.encounter_id,
     });
@@ -60,6 +71,12 @@ router.delete("/:encounter_id", async (req, res) => {
     );
     wing.encounters.splice(encounterIndex, 1);
     const newWing = await wing.save();
+    logger.createLog(
+      req.user.username,
+      "deleted",
+      "encounter",
+      req.params.wing_id
+    );
     res.json(newWing);
   } catch (err) {
     res.status(400).json(`Error: ${err}`);
@@ -68,6 +85,8 @@ router.delete("/:encounter_id", async (req, res) => {
 
 router.post("/", async (req, res) => {
   try {
+    if (!req.user) return res.status("403").json("Unauthenticated");
+
     const wing = await Wing.findById(req.params.wing_id);
     if (wing == null) return res.status(404).json("Wing not found.");
 
@@ -81,6 +100,12 @@ router.post("/", async (req, res) => {
 
     wing.encounters.push(newEncounter);
     const newWing = await wing.save();
+    logger.createLog(
+      req.user.username,
+      "added",
+      "encounter",
+      req.params.wing_id
+    );
     res.json(newWing);
   } catch (err) {
     res.status(400).json(`Error: ${err}`);

@@ -1,6 +1,7 @@
 const router = require("express").Router({ mergeParams: true });
 
 let Wing = require("../models/wing.model");
+const logger = require("../utils/logging");
 
 router.get("/", async (req, res) => {
   try {
@@ -37,6 +38,8 @@ router.get("/:subgroup_id", async (req, res) => {
 
 router.post("/", async (req, res) => {
   try {
+    if (!req.user) return res.status("403").json("Unauthenticated");
+
     const wing = await Wing.findOne({
       "encounters._id": req.params.encounter_id,
     });
@@ -50,6 +53,12 @@ router.post("/", async (req, res) => {
     );
     encounter.subgroups.push(subgroup);
     const newWing = await wing.save();
+    logger.createLog(
+      req.user.username,
+      "added",
+      "subgroup",
+      req.params.encounter_id
+    );
     res.json(newWing);
   } catch (err) {
     res.status(400).json(`Error: ${err}`);
@@ -58,6 +67,8 @@ router.post("/", async (req, res) => {
 
 router.put("/:subgroup_id", async (req, res) => {
   try {
+    if (!req.user) return res.status("403").json("Unauthenticated");
+
     const wing = await Wing.findOne({
       "encounters.subgroups._id": req.params.subgroup_id,
     });
@@ -70,6 +81,12 @@ router.put("/:subgroup_id", async (req, res) => {
     );
     subgroup.label = req.body.label;
     const newWing = await wing.save();
+    logger.createLog(
+      req.user.username,
+      "updated",
+      "subgroup",
+      req.params.subgroup_id
+    );
     res.json(newWing);
   } catch (err) {
     res.status(400).json(`Error: ${err}`);
@@ -78,6 +95,8 @@ router.put("/:subgroup_id", async (req, res) => {
 
 router.delete("/:subgroup_id", async (req, res) => {
   try {
+    if (!req.user) return res.status("403").json("Unauthenticated");
+
     const wing = await Wing.findOne({
       "encounters.subgroups._id": req.params.subgroup_id,
     });
@@ -90,6 +109,12 @@ router.delete("/:subgroup_id", async (req, res) => {
     );
     encounter.subgroups.splice(subgroupIndex, 1);
     const newWing = await wing.save();
+    logger.createLog(
+      req.user.username,
+      "deleted",
+      "subgroup",
+      req.params.encounter_id
+    );
     res.json(newWing);
   } catch (err) {
     res.status(400).json(`Error: ${err}`);

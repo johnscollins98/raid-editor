@@ -44,6 +44,9 @@ app.use("/api/wings", wingRoute);
 const authRoute = require("./routes/auth");
 app.use("/auth", authRoute);
 
+const logRoute = require("./routes/log");
+app.use("/api/log", logRoute);
+
 app.use(express.static(path.join(__dirname, "..", "client", "build")));
 
 app.get("*", (req, res) => {
