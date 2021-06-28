@@ -14,13 +14,13 @@ app.use(cors());
 app.use(express.json());
 app.use(
   session({
-    secret: "some random secret",
+    secret: process.env.SESSION_SECRET,
     cookie: {
       maxAge: 60000 * 60 * 24,
     },
     resave: true,
     saveUninitialized: false,
-    name: "discord.oauth2",
+    name: 'discord.oauth2',
   })
 );
 app.use(passport.initialize());
