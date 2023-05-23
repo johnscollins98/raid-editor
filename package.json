@@ -3,9 +3,10 @@
   "version": "1.0.0",
   "description": "Application to edit raid compositions.",
   "main": "index.js",
+  "private": "true",
   "scripts": {
-    "heroku-prebuild": "cd client && npm install && npm run build && cd .. && cd server && npm install",
-    "start": "cd server && npm start"
+    "build": "yarn workspaces run build",
+    "start": "yarn workspace server start"
   },
   "repository": {
     "type": "git",
@@ -17,5 +18,8 @@
   "bugs": {
     "url": "https://github.com/johnscollins98/raid-editor/issues"
   },
-  "homepage": "https://github.com/johnscollins98/raid-editor#readme"
+  "homepage": "https://github.com/johnscollins98/raid-editor#readme",
+  "workspaces": [
+    "client", "server"
+  ]
 }

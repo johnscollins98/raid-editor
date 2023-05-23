@@ -34,7 +34,7 @@ router.get("/authorization", async (req, res) => {
 });
 
 const getRoles = async (userId) => {
-  const url = `http://discord.com/api/guilds/${process.env.SO_ID}/members/${userId}`;
+  const url = `https://discord.com/api/guilds/${process.env.SO_ID}/members/${userId}`;
   const params = { headers: { Authorization: `Bot ${process.env.BOT_TOKEN}` } };
   const user = await axios.get(url, params);
   return user.data.roles;
